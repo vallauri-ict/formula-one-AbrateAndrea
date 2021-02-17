@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormulaOneWebForm", "Formul
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormulaOneDLL", "FormulaOneDLL\FormulaOneDLL.csproj", "{78E92961-5AA8-4F32-9AED-0948AA01A369}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormulaOneWebServices", "FormulaOneWebServices\FormulaOneWebServices.csproj", "{20FAC1FB-622E-4AB7-9A94-63B944302A9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{78E92961-5AA8-4F32-9AED-0948AA01A369}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78E92961-5AA8-4F32-9AED-0948AA01A369}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78E92961-5AA8-4F32-9AED-0948AA01A369}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20FAC1FB-622E-4AB7-9A94-63B944302A9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20FAC1FB-622E-4AB7-9A94-63B944302A9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20FAC1FB-622E-4AB7-9A94-63B944302A9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20FAC1FB-622E-4AB7-9A94-63B944302A9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
