@@ -44,6 +44,8 @@
     <Compile Include="Country.cs" />
     <Compile Include="DBtools.cs" />
     <Compile Include="Driver.cs" />
+    <Compile Include="DriverDetailsDTO.cs" />
+    <Compile Include="DriverListDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Team.cs" />
   </ItemGroup>

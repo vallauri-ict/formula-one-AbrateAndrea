@@ -20,12 +20,20 @@ namespace FormulaOneWebServices
             return db.GetTeamsObj();
         }
 
-        // GET: api/team/1
-        [HttpGet("{id}")]
-        public Team Get(string id)
+        // GET: api/team/id
+        [HttpGet("id/{id}")]
+        public Team Get(int id)
         {
             DbTools db = new DbTools();
             return db.GetTeam(id);
+        }
+
+        // GET: api/team/name/Mercedes-AMG Petronas F1 Team
+        [HttpGet("name/{name}")]
+        public Team Get(string name)
+        {
+            DbTools db = new DbTools();
+            return db.GetTeamName(name);
         }
 
         // POST: api/team

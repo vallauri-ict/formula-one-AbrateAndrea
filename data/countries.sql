@@ -234,7 +234,7 @@ INSERT INTO [Country] VALUES ('TV', 'Tuvalu');
 INSERT INTO [Country] VALUES ('UG', 'Uganda');
 INSERT INTO [Country] VALUES ('UA', 'Ukraine');
 INSERT INTO [Country] VALUES ('AE', 'United Arab Emirates');
-INSERT INTO [Country] VALUES ('GB', 'United Kingdom');
+INSERT INTO [Country] VALUES ('UK', 'United Kingdom');
 INSERT INTO [Country] VALUES ('US', 'United States');
 INSERT INTO [Country] VALUES ('UM', 'United States minor outlying islands');
 INSERT INTO [Country] VALUES ('UY', 'Uruguay');

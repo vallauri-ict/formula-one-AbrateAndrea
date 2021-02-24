@@ -14,26 +14,30 @@ namespace FormulaOneWebServices
     {
         // GET: api/driver
         [HttpGet]
-        public IEnumerable<Driver> Get()
-        {
-            DbTools db = new DbTools();
-            return db.GetDriversObj();
-        }
+        
 
-        //GET: api/driver/1
-        [HttpGet("{id}")]
-        public Driver Get(string id)
+        //GET: api/driver/id/1
+        [HttpGet("id/{id}")]
+        public Driver Get(int id)
         {
             DbTools db = new DbTools();
             return db.GetDriver(id);
         }
 
         //GET: api/driver/number/44
-        [HttpGet("number/{number}")]
-        public Driver Get(int number)
+        //[HttpGet("number/{number:int}")]
+        //public Driver Get(int number)
+        //{
+        //    DbTools db = new DbTools();
+        //    return db.GetDriverNumber(number);
+        //}
+
+        //GET: api/driver/name/Lewis Hamilton
+        [HttpGet("name/{name}")]
+        public Driver Get(string name)
         {
             DbTools db = new DbTools();
-            return db.GetDriverNumber(number);
+            return db.GetDriverName(name);
         }
 
         // POST: api/driver
