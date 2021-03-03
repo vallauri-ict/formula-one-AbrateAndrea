@@ -48,6 +48,8 @@
     <Compile Include="DriverListDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Team.cs" />
+    <Compile Include="TeamDetailsDTO.cs" />
+    <Compile Include="TeamListDTO.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

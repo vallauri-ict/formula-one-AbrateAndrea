@@ -51,6 +51,8 @@ namespace FormulaOneWebServices
                     await context.Response.WriteAsync("/api/team [lista di tutti i driver]\n");
                     await context.Response.WriteAsync("/api/team/id/1 [un team in base all'id]\n");
                     await context.Response.WriteAsync("/api/team/name/Mercedes-AMG Petronas F1 Team [un team in base al nome]\n");
+                    await context.Response.WriteAsync("/api/listTeams [attributi principali di tutti i teams]\n");
+                    await context.Response.WriteAsync("/api/listTeams/1 [attributi principali di un singolo team]\n"); 
 
                 });
                 endpoints.MapControllers();

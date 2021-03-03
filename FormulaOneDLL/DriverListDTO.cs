@@ -8,19 +8,27 @@ namespace FormulaOneDLL
 {
     public class DriverListDTO
     {
-        public DriverListDTO(int number, string name, byte[] image, string teamName, string countryName)
+        public DriverListDTO(int number, string name, byte[] image, string teamName, string countryCode)
         {
-            this.number = number;
-            this.name = name;
-            this.image = image;
-            this.teamName = teamName;
-            this.countryName = countryName;
+            Number = number;
+            Name = name;
+            Image = image;
+            TeamName = teamName;
+            CountryCode = countryCode;
         }
 
-        public int number { get; set; }
-        public string name { get; set; }
-        public byte[] image { get; set; }
-        public string teamName { get; set; }
-        public string countryName { get; set; }
+        public int Number { get; set; }
+        public string Name { get; set; }
+        public byte[] Image { get; set; }
+        public string TeamName { get; set; }
+        public string CountryCode { get; set; }
+
+        public string CountryFlag
+        {
+            get
+            {
+                return String.Format("https://www.countryflags.io/{0}/flat/64.png", CountryCode.ToLower());
+            }
+        }
     }
 }

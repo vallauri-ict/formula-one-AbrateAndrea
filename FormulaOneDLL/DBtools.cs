@@ -201,38 +201,6 @@ namespace FormulaOneDLL
             return retVal;
         }
 
-        //public Driver GetDriverNumber(int number)
-        //{
-        //    Driver retVal = null;
-        //    using (SqlConnection dbConn = new SqlConnection())
-        //    {
-        //        dbConn.ConnectionString = CONNECTION_STRING;
-        //        String sql = "SELECT * FROM driver 
-        //        using (SqlCommand command = new SqlCommand(sql, dbConn))
-        //        {
-        //            dbConn.Open();
-        //            using (SqlDataReader reader = command.ExecuteReader())
-        //            {
-        //                while (reader.Read())
-        //                {
-        //                    int id = 0;
-        //                    int number_driver = reader.GetInt32(1);
-        //                    string name = reader.GetString(2);
-        //                    DateTime date = reader.GetDateTime(3);
-        //                    byte[] HelmetImage = reader["HelmetImage"] as byte[];
-        //                    byte[] Image = reader["Image"] as byte[];
-        //                    int TeamID = reader.GetInt32(6);
-        //                    int podiums = reader.GetInt32(7);
-        //                    string countryCode = reader.GetString(8);
-        //                    Console.WriteLine("{0} {1} {2} {3} {4} {5} {6} {7} {8}", id, number, name, date, HelmetImage, Image, TeamID, podiums, countryCode);
-        //                    retVal = new Driver(id, number, name, date, HelmetImage, Image, TeamID, podiums, countryCode);
-        //                }
-        //            }
-        //        }
-        //    }
-        //    return retVal;
-        //}
-
         public Driver GetDriverName(string name)
         {
             Driver retVal = null;
@@ -271,7 +239,7 @@ namespace FormulaOneDLL
             using (SqlConnection dbConn = new SqlConnection())
             {
                 dbConn.ConnectionString = CONNECTION_STRING;
-                String sql = "SELECT d.Number,d.Name,d.Image,t.TeamName,c.countryName FROM driver d,team t,country c WHERE d.TeamID=t.ID AND d.CountryCode=c.countryCode;";
+                String sql = "SELECT d.Number,d.Name,d.Image,t.TeamName,c.countryCode FROM driver d,team t,country c WHERE d.TeamID=t.ID AND d.CountryCode=c.countryCode;";
                 using (SqlCommand command = new SqlCommand(sql, dbConn))
                 {
                     dbConn.Open();
@@ -283,9 +251,9 @@ namespace FormulaOneDLL
                             string name = reader.GetString(1);
                             byte[] Image = reader["Image"] as byte[];
                             string TeamName = reader.GetString(3);
-                            string countryName = reader.GetString(4);
-                            //Console.WriteLine("{0} {1} {2} {3} {4}", number, name, Image, TeamName, countryName);
-                            retVal.Add(new DriverListDTO(number, name, Image, TeamName, countryName));
+                            string countryCode = reader.GetString(4);
+                            Console.WriteLine("{0} {1} {2} {3} {4}", number, name, Image, TeamName, countryCode);
+                            retVal.Add(new DriverListDTO(number, name, Image, TeamName, countryCode));
                         }
                     }
                 }
@@ -420,6 +388,104 @@ namespace FormulaOneDLL
                             retVal = new Team(id, teamName, teamLogo, baseT, teamChief, technicalChief, powerUnit, carImage, countryID, worldChampionships, polePositions);
                         }
                     }
+                }
+            }
+            return retVal;
+        }
+
+        public List<TeamListDTO> GetTeamsList()
+        {
+            List<TeamListDTO> retVal = new List<TeamListDTO>();
+            string tName = "";
+            byte[] tLogo = new byte[0];
+            string[] dNames = new string[2];
+            List<byte[]> dImages = new List<byte[]>();
+            byte[] carImage = new byte[0];
+            int i = 0;
+            using (SqlConnection dbConn = new SqlConnection())
+            {
+                dbConn.ConnectionString = CONNECTION_STRING;
+                dbConn.Open();
+                string sql = "SELECT t.TeamName, t.TeamLogo, d.Name, d.Image, t.CarImage FROM Team t, Driver d WHERE d.TeamID = t.ID ORDER BY t.TeamName";
+                SqlCommand cmd = new SqlCommand(sql, dbConn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    if (i % 2 == 0)
+                    {
+                        tName = reader.GetString(0);
+                        tLogo = reader["TeamLogo"] as byte[];
+                        dNames = new string[2];
+                        dNames[0] = reader.GetString(2);
+                        dImages = new List<byte[]>();
+                        dImages.Add(reader["Image"] as byte[]);
+                        carImage = reader["CarImage"] as byte[];
+                    }
+                    else
+                    {
+                        dNames[1] = reader.GetString(2);
+                        dImages.Add(reader["Image"] as byte[]);
+                        TeamListDTO team = new TeamListDTO(tName, tLogo, dNames, dImages, carImage);
+                        retVal.Add(team);
+                    }
+                    i++;
+                }
+            }
+            return retVal;
+        }
+
+        public TeamDetailsDTO GetTeamsDetails(int id)
+        {
+            TeamDetailsDTO retVal = null;
+            int id_team = 0;
+            string TeamName = string.Empty;
+            byte[] teamLogo = null;
+            string baseT = string.Empty;
+            string teamChief = string.Empty;
+            string technicalChief = string.Empty;
+            string powerUnit = string.Empty;
+            byte[] CarImage = null;
+            string countryID = string.Empty;
+            int worldChampionships = 0;
+            int polePositions = 0;
+            int[] numbers = new int[2];
+            string[] dNames = new string[2];
+            List<byte[]> dImages = new List<byte[]>();
+            int i = 0;
+            using (SqlConnection dbConn = new SqlConnection())
+            {
+                dbConn.ConnectionString = CONNECTION_STRING;
+                dbConn.Open();
+                string sql = "SELECT t.id,t.TeamName,t.TeamLogo,t.Base,t.TeamChief,t.TechnicalChief,t.PowerUnit,t.CarImage,t.countryID,t.worldChampionships,t.polePositions,d.number,d.Name,d.Image FROM driver d, team t WHERE d.TeamID = t.ID AND t.ID ='" + id + "';";
+                SqlCommand cmd = new SqlCommand(sql, dbConn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    if (i % 2 == 0)
+                    {
+                        id_team = reader.GetInt32(0);
+                        TeamName = reader.GetString(1); ;
+                        teamLogo = reader["TeamLogo"] as byte[]; ;
+                        baseT = reader.GetString(3); ;
+                        teamChief = reader.GetString(4); ;
+                        technicalChief = reader.GetString(5); ;
+                        powerUnit = reader.GetString(6); ;
+                        CarImage = reader["CarImage"] as byte[]; ;
+                        countryID = reader.GetString(8); ;
+                        worldChampionships = reader.GetInt32(9);
+                        polePositions = reader.GetInt32(10);
+                        numbers[0] = reader.GetInt32(11);
+                        dNames[0] = reader.GetString(12);
+                        dImages.Add(reader["Image"] as byte[]);
+                    }
+                    else
+                    {
+                        numbers[1] = reader.GetInt32(11);
+                        dNames[1] = reader.GetString(12);
+                        dImages.Add(reader["Image"] as byte[]);
+                        retVal = new TeamDetailsDTO(id_team, TeamName, teamLogo, baseT, teamChief, technicalChief, powerUnit, CarImage, countryID, worldChampionships, polePositions, numbers, dNames, dImages);
+                    }
+                    i++;
                 }
             }
             return retVal;

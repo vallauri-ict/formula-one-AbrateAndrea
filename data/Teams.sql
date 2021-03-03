@@ -1,38 +1,146 @@
-CREATE TABLE [dbo].[Teams]
+CREATE TABLE [dbo].[Team]
 (
-	[id] INT NOT NULL PRIMARY KEY IDENTITY,
-    [name] VARCHAR(128) NOT NULL,
-    [fullTeamName] VARCHAR(128) NOT NULL,
-    [extCountry] CHAR(2) NOT NULL,
-    [powerUnit] VARCHAR(128) NOT NULL,
-    [technicalChief] VARCHAR(128) NOT NULL,
-	[chassis] VARCHAR(128) NOT NULL,
-	[extFirstDriver] INT NOT NULL,
-	[extSecondDriver] INT NOT NULL
+	[ID] int PRIMARY KEY IDENTITY(1,1),
+    [TeamName] varchar(255) UNIQUE NOT NULL,
+    [TeamLogo] image NOT NULL,
+    [Base] varchar(255) NOT NULL,
+    [TeamChief] varchar(255) NOT NULL,
+    [TechnicalChief] varchar(255) NOT NULL,
+	[PowerUnit] varchar(255) NOT NULL,
+	[CarImage] image NOT NULL,
+	[CountryID] char(2) NOT NULL,
+	[WorldChampionships] int default 0,
+    [PolePositions] int default 0
 );
 
-SET IDENTITY_INSERT [dbo].[Teams] ON;
+INSERT INTO [Team]
+VALUES(
+		'Mercedes-AMG Petronas F1 Team',
+		'C:\\data\\formulaone\\img\\mercedesTeamLogo.jpg',
+        'Brackley',
+		'Toto Wolff',
+		'James Allison',
+		'Mercedes',
+		'C:\\data\\formulaone\\img\\mercedesCarImage.jpg',
+		'GB',
+		6,
+		113        
+);
+INSERT INTO [Team]
+VALUES(
+		'Aston Martin Red Bull Racing',
+		'C:\\data\\formulaone\\img\\redBullTeamLogo.jpg',
+        'Milton Keynes',
+		'Christian Horner',
+		'Pierre Waché',
+		'Honda',
+		'C:\\data\\formulaone\\img\\redBullCarImage.jpg',
+		'GB',
+		4,
+		66        
+);
+INSERT INTO [Team]
+VALUES(
+		'McLaren F1 Team',
+		'C:\\data\\formulaone\\img\\mcLarenTeamLogo.jpg',
+        'Woking',
+		'Andreas Seidl',
+		'James Key',
+		'Renault',
+		'C:\\data\\formulaone\\img\\mcLarenCarImage.jpg',
+		'GB',
+		8,
+		155        
+);
+INSERT INTO [Team]
+VALUES(
+		'BWT Racing Point F1 Team',
+		'C:\\data\\formulaone\\img\\racingPointTeamLogo.jpg',
+        'Silverstone',
+		'Otmar Szafnauer',
+		'Andrew Green',
+		'BWT Mercedes',
+		'C:\\data\\formulaone\\img\\racingPointCarImage.jpg',
+		'GB',
+		0,
+		0        
+);
+INSERT INTO [Team]
+VALUES(
+		'Renault DP World F1 Team',
+		'C:\\data\\formulaone\\img\\renaultTeamLogo.jpg',
+        'Enstone',
+		'Cyril Abiteboul',
+		'TBC',
+		'Renault',
+		'C:\\data\\formulaone\\img\\renaultCarImage.jpg',
+		'GB',
+		2,
+		20        
+);
+INSERT INTO [Team]
+VALUES(
+		'Scuderia Ferrari Mission Winnow',
+		'C:\\data\\formulaone\\img\\ferrariTeamLogo.jpg',
+        'Maranello',
+		'Mattia Binotto',
+		'Simone Resta',
+		'Ferrari',
+		'C:\\data\\formulaone\\img\\ferrariCarImage.jpg',
+		'IT',
+		16,
+		221        
+);
+INSERT INTO [Team]
+VALUES(
+		'Scuderia AlphaTauri Honda',
+		'C:\\data\\formulaone\\img\\alphaTauriTeamLogo.jpg',
+        'Faenza',
+		'Franz Tost',
+		'Jody Egginton',
+		'Honda',
+		'C:\\data\\formulaone\\img\\alphaTauriCarImage.jpg',
+		'IT',
+		0,
+		1        
+);
+INSERT INTO [Team]
+VALUES(
+		'Alfa Romeo Racing ORLEN',
+		'C:\\data\\formulaone\\img\\alfaRomeoTeamLogo.jpg',
+        'Hinwil',
+		'Frédéric Vasseur',
+		'Jan Monchaux',
+		'Ferrari',
+		'C:\\data\\formulaone\\img\\alfaRomeoCarImage.jpg',
+		'IT',
+		0,
+		1        
+);
+INSERT INTO [Team]
+VALUES(
+		'Haas F1 Team',
+		'C:\\data\\formulaone\\img\\haasTeamLogo.jpg',
+        'Kannapolis',
+		'Guenther Steiner',
+		'Rob Taylor',
+		'Ferrari',
+		'C:\\data\\formulaone\\img\\haasCarImage.jpg',
+		'US',
+		0,
+		0        
+);
+INSERT INTO [Team]
+VALUES(
+		'Williams Racing',
+		'C:\\data\\formulaone\\img\\williamsTeamLogo.jpg',
+        'Grove',
+		'Simon Roberts',
+		'TBC',
+		'Mercedes',
+		'C:\\data\\formulaone\\img\\williamsCarImage.jpg',
+		'GB',
+		9,
+		129        
+);
 
-INSERT INTO [dbo].[Teams]
-(
-	id,
-	name,
-	fullTeamName,
-	extCountry,
-	powerUnit,
-	technicalChief,
-	chassis,
-	extFirstDriver,
-	extSecondDriver
-)
-VALUES
-(1,'Alfa Romeo', 'Alfa Romeo Racing', 'CH', 'Ferrari', 'Jan Monchaux', 'C38', 14, 16),
-(2,'Ferrari', 'Scuderia Ferrari Mission Winnow', 'IT', 'Ferrari', 'Mattia Binotto', 'SF90',3,5),
-(3,'Red Bull', 'Aston Martin Red Bull Racing', 'GB', 'Honda', 'Pierre Waché', 'RB15',7,8),
-(4,'Haas', 'Haas F1 Team', 'US', 'Ferrari', 'Rob Taylor', 'VF-19', 18, 17),
-(5,'McLaren', 'McLaren F1 Team', 'GB', 'Renault', 'James Key', 'MCL34', 9, 10),
-(6,'Mercedes', 'Mercedes AMG Petronas Motorsport', 'GB', 'Mercedes', 'James Allison', 'W10',1,2),
-(7,'Toro Rosso', 'Red Bull Toro Rosso Honda', 'IT', 'Honda', 'Jody Eggington', 'STR14', 20, 4),
-(8,'Racing Point', 'SportPesa Racing Point F1 Team', 'GB', 'BWT Mercedes', 'Andrew Green', 'RP19', 12, 15),
-(9,'Williams', 'ROKiT Williams Racing', 'GB', 'Mercedes', 'TBC', 'FW42', 13, 19),
-(10,'Renault', 'Renault F1 Team', 'GB', 'Renault', 'Nick Chester', 'R.S.19',11,6);
